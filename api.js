@@ -1,6 +1,8 @@
 var express = require('express');
 var axios = require('axios');
+var aes = require('./aes.js');
 var app = express();
+var key = "superSecretK";
 
 app.get('/', function (req, res, next) {
   if (req.headers.authorization) {
@@ -15,7 +17,7 @@ app.get('/', function (req, res) {
   console.log('API');
   axios.get('http://localhost:3001').then((response) => {
     console.log(response.data)
-    res.send({ data: response.data, from: "api" })
+    res.send({ data: aes.decrypt(response.data,key), from: "api" })
   }).catch(() => {
     res.status(500)
     res.end()
