@@ -13,7 +13,7 @@ app.get('/', function (req, res, next) {
 
 app.get('/', function (req, res) {
   console.log('API');
-  axios.get('http://localhost:3001').then((response) => {
+  axios.get('http://localhost:3001/?apiKey=fafafa').then((response) => {
     console.log(response.data)
     res.send({ data: response.data, from: "api" })
   }).catch(() => {
